@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>めいじ応援ナビ｜明治大学元父母の会</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2A1757">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;background:#ECEAF4;color:#1e1a2e}
+.wrap{max-width:1080px;margin:0 auto;padding:20px 14px 40px;display:flex;gap:26px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+.side{max-width:430px;background:#fff;border-radius:16px;padding:22px;box-shadow:0 4px 18px rgba(42,23,87,.10)}
+.side h1{font-size:21px;color:#2A1757;line-height:1.45}.side h2{font-size:16px;color:#2A1757;margin:18px 0 6px}
+.side p,.side li{font-size:14.5px;line-height:1.75}.side ul{padding-left:20px}
+.badge{display:inline-block;background:#B3261E;color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:999px;margin-bottom:10px}
+.phone{width:100%;max-width:430px;background:#fff;border-radius:30px;overflow:hidden;box-shadow:0 10px 34px rgba(42,23,87,.22);border:1.5px solid #d9d4ea;display:flex;flex-direction:column;height:100dvh;max-height:100dvh;border-radius:0;border:none}
+.demo-bar{background:#B3261E;color:#fff;text-align:center;font-size:13.5px;font-weight:700;padding:7px}
+.app-head{background:#2A1757;color:#fff;padding:16px 18px 13px}
+.app-head .org{font-size:12.5px;color:#D8CFF5;letter-spacing:.06em}
+.app-head .name{font-size:25px;font-weight:800;margin-top:1px}
+.app-head .tag{font-size:14px;color:#EDE9FA;margin-top:3px}
+.head-row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.head-logo{height:56px;width:auto;flex:none}
+.head-banner{height:56px;width:auto;border-radius:8px;background:#fff;flex:none}
+.screen{flex:1;overflow-y:auto;padding:14px 16px 18px;display:none}.screen.active{display:block}
+.sec-title{font-size:19px;font-weight:800;color:#2A1757;margin:6px 0 10px}
+.sec-title small{font-size:13px;color:#5a5570;font-weight:600}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.chip{background:#F1EEFA;color:#2A1757;font-size:15px;font-weight:700;padding:8px 15px;border-radius:999px;border:1px solid #CFC6EC;cursor:pointer;font-family:inherit}
+.chip.on{background:#2A1757;color:#fff}
+.card{border:1.5px solid #CFC6EC;border-radius:16px;padding:14px;margin-bottom:12px}
+.card.bunka{border-color:#E3C98A}
+.card-top{display:flex;gap:11px;align-items:center}
+.date{background:#2A1757;color:#fff;border-radius:12px;text-align:center;padding:7px 9px;min-width:60px}
+.date.bunka{background:#8A6D1F}.date .m{font-size:12px}.date .d{font-size:25px;font-weight:800;line-height:1.05}.date .w{font-size:12px}
+.card h3{font-size:18.5px;line-height:1.35}.card .sub{font-size:15px;color:#333;margin-top:1px}
+.meta{font-size:15.5px;line-height:1.6;margin-top:9px}.meta .note{font-size:13.5px;color:#5a5570}
+.src{font-size:12.5px;color:#2A1757;background:#F1EEFA;border-radius:8px;padding:5px 9px;margin-top:8px}
+.src.bunka{color:#6B5510;background:#FBF3D9}
+.btns{display:flex;gap:7px;margin-top:11px}
+.btn{flex:1;text-align:center;font-size:14.5px;font-weight:700;padding:11px 2px;border-radius:10px;cursor:pointer;text-decoration:none;border:1.5px solid #2A1757;color:#2A1757;background:#fff;font-family:inherit}
+.btn.primary{background:#2A1757;color:#fff}
+.report{background:#F7F6FB;border-radius:14px;padding:12px 14px;font-size:15px;line-height:1.65;margin-bottom:10px}
+.manners{background:#F1EEFA;border-radius:14px;padding:12px 14px;font-size:15px;line-height:1.65;margin-bottom:10px}.manners b{color:#2A1757}
+.join-note{font-size:13.5px;color:#5a5570;line-height:1.6;margin-top:10px}
+.nav{display:flex;border-top:1.5px solid #E4E0F2;background:#FBFAFE}
+.nav button{flex:1;background:none;border:none;padding:12px 2px;font-size:14px;font-weight:600;color:#5a5570;cursor:pointer;font-family:inherit}
+.nav button.on{color:#2A1757;font-weight:800;box-shadow:inset 0 3px 0 #2A1757}
+.back{background:none;border:none;color:#2A1757;font-size:15px;font-weight:700;cursor:pointer;padding:4px 0 10px;font-family:inherit}
+.detail h3{font-size:21px;color:#2A1757;line-height:1.4}.detail h4{font-size:16.5px;color:#2A1757;margin:15px 0 5px}
+.detail p,.detail li{font-size:15.5px;line-height:1.7}.detail ul{padding-left:20px}
+.q p.qtext{font-size:17.5px;font-weight:700;line-height:1.55;margin:8px 0 12px}
+.opt{display:block;width:100%;text-align:left;background:#F7F6FB;border:1.5px solid #CFC6EC;border-radius:12px;padding:14px;font-size:16.5px;font-weight:600;margin-bottom:9px;cursor:pointer;font-family:inherit;color:#1e1a2e}
+.prog{font-size:13px;color:#5a5570}
+label.fl{display:block;font-size:15px;font-weight:700;margin:12px 0 5px}
+input.fi,textarea.fi,select.fi{width:100%;font-size:16px;padding:11px;border:1.5px solid #CFC6EC;border-radius:10px;font-family:inherit}
+.submit{width:100%;background:#2A1757;color:#fff;border:none;font-size:16.5px;font-weight:800;padding:13px;border-radius:11px;margin-top:14px;cursor:pointer;font-family:inherit}
+.ok{background:#E9F5EC;border:1.5px solid #B9DCC2;color:#1F6B35;border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.6;margin-top:12px;display:none}
+.purpose{background:#F7F6FB;border-radius:14px;padding:14px;font-size:15px;line-height:1.75}
+a.ext{color:#2A1757;font-weight:700}
+</style></head>
+<body><div class="wrap" style="max-width:430px;padding:0">
+<div class="phone">
+<div class="demo-bar">試作版（PWA） ― ホーム画面に追加できます</div>
+<div class="app-head"><div class="head-row"><img class="head-logo" src="logo.png" alt="明治大学元父母の会ロゴ"><div><div class="org">明治大学元父母の会</div><div class="name">めいじ応援ナビ</div></div><img class="head-banner" src="banner.png" alt="つながる想い、広がる Meiji"></div><div class="tag">明治はひとつ ― 学生の応援・鑑賞は、ここひとつで</div></div>
+
+<section class="screen active" id="scr-home">
+<div class="sec-title">今週の応援 <small>11月21日（土）〜</small></div>
+<div class="chips">
+<button class="chip on" onclick="filterEv('all',this)">すべて</button>
+<button class="chip" onclick="filterEv('sports',this)">スポーツ</button>
+<button class="chip" onclick="filterEv('bunka',this)">文化系</button>
+</div>
+<div id="evlist"></div>
+<div class="sec-title" style="margin-top:16px">行ってきたよ <small>みんなのリポート</small></div>
+<div class="report"><b>11月15日（日）アメリカンフットボール部 リーグ最終戦</b>（味の素スタジアム アミノバイタルフィールド）<br>明治 13-7 早稲田で勝利。最後まで声援が途切れませんでした。（元父母の会ファンリポートより）</div>
+<div class="manners"><b>今月の品位ある応援</b><br>勝敗にかかわらず、両チームへ拍手を。相手チームの好プレーにも拍手を送るのが、明治の応援です。</div>
+<button class="btn primary" style="width:100%" onclick="show('about')">入会・寄付について見る（月額380円〜）</button>
+<p class="join-note">このアプリはログイン不要です。名前や連絡先など、個人情報は集めません。</p>
+</section>
+
+<section class="screen detail" id="scr-detail">
+<button class="back" onclick="show('home')">← 今週の応援に戻る</button>
+<div id="detail-body"></div>
+</section>
+
+<section class="screen" id="scr-help">
+<div class="sec-title">あなたに合った応援 <small>お助け</small></div>
+<div id="quiz"></div>
+</section>
+<section class="screen" id="scr-report">
+<div class="sec-title">行ってきたよ <small>リポート</small></div>
+<div class="report"><b>11月15日（日）アメリカンフットボール部 リーグ最終戦</b><br>明治 13-7 早稲田。会場の熱気が伝わる一戦でした。（Mファンリポートより）</div>
+<div class="report"><b>表示例 ― 投稿のイメージです</b><br>初めて落語研究会の二人会へ。90分あっという間で、学生さんの噺に大笑いしました。次は友人を誘って行きます。（ニックネーム投稿の表示例）</div>
+<div class="sec-title" style="margin-top:14px">リポートを書く</div>
+<p style="font-size:14px;color:#5a5570;line-height:1.6">ニックネームで投稿できます。本名や連絡先は不要です。内容は公開前に運営が確認します。写真の位置情報は自動で除かれます。</p>
+<label class="fl">ニックネーム</label>
+<input class="fi" id="rp-name" placeholder="例）紫紺ファン">
+<label class="fl">行ったイベント</label>
+<select class="fi" id="rp-ev">
+<option>11/21 硬式野球部 明治神宮野球大会 初戦</option>
+<option>11/21 落語研究会 二人会</option>
+<option>11/28 サッカー部 インカレ予選（対 高松大学）</option>
+<option>11/28 落語研究会 悪のたまり場 Vol.8</option>
+<option>11/28 落語研究会 第二回青明寄席</option>
+<option>12/2 サッカー部 インカレ決勝ラウンド（対 国士舘大学）</option>
+</select>
+<label class="fl">感想（ひとこと）</label>
+<textarea class="fi" id="rp-text" rows="3" placeholder="会場の様子や、学生への応援メッセージをどうぞ"></textarea>
+<label class="fl">写真を選ぶ（デモでは送信されません）</label>
+<input class="fi" type="file" accept="image/*">
+<button class="submit" onclick="document.getElementById('rp-ok').style.display='block'">投稿する（確認画面へ）</button>
+<div class="ok" id="rp-ok">ありがとうございます。これはデモのため、実際には送信されません。<br>本番では「下書き保存 → 運営の確認 → 公開」の順に進みます。</div>
+</section>
+
+<section class="screen" id="scr-about">
+<div class="sec-title">会について</div>
+<div class="purpose">私たち明治大学元父母の会は、大学および父母会の発展・向上に寄与し、明大生を支え応援します。そしてそのことを通じ、私たち元父母自身が心身ともに健康でかつ社会的に幸福でより充実した生活を送ることを目的とします。<br><span style="font-size:12.5px;color:#5a5570">（明治大学公式ページ「元父母の会」より）</span></div>
+<div class="sec-title" style="margin-top:16px">入会・寄付</div>
+<p style="font-size:15px;line-height:1.7">入会は、専用寄付サイトでの月額寄付（380円以上）のお申し込みをもって会員となります。寄付金は明治大学連合父母会奨学基金に組み入れられ、学生への奨学金に活用されます。2025年度の実績は 1,193,179円・1,340件です。</p>
+<a class="btn primary" style="display:block;margin-top:12px" href="https://www.meiji.ac.jp/fubokai/old.html" target="_blank" rel="noopener">大学公式ページで入会方法を見る</a>
+<div class="sec-title" style="margin-top:16px">安心について</div>
+<p style="font-size:15px;line-height:1.7">このアプリは個人情報を集めません。ログインも不要です。会員情報や寄付の情報は扱わず、入会・寄付は大学の公式サイトで行います。</p>
+<a class="btn" style="display:block;margin-top:12px" href="https://www.instagram.com/meiji_motofubo/" target="_blank" rel="noopener">公式Instagram @meiji_motofubo を見る</a>
+</section>
+
+<nav class="nav">
+<button class="on" id="nav-home" onclick="show('home')">ホーム</button>
+<button id="nav-help" onclick="show('help')">探す</button>
+<button id="nav-report" onclick="show('report')">行ってきたよ</button>
+<button id="nav-about" onclick="show('about')">会について</button>
+</nav>
+</div></div>
+<script>
+const EV=[
+{id:1,genre:'sports',d:'11/21',day:'21',w:'土',time:'13:30',team:'硬式野球部',title:'明治神宮野球大会 初戦',opp:'対戦相手：筑波大学と中京大学の勝者（11/19決定）',venue:'明治神宮野球場',area:'tokyo',io:'out',seat:'cheer',src:'出典：大会日程（主催者公式ページでの最終確認は公開前に行います）',hl:'秋のリーグ戦で優勝した明治の、全国大会の初戦です。神宮球場の大舞台で、学生の全力プレーを応援しましょう。',manners:['応援歌は周りに合わせて一緒に','相手チームの好プレーにも拍手を','通路に荷物を置かず、周りへの配慮を'],gcal:'20261121T133000/20261121T163000',q:'明治神宮野球場'},
+{id:2,genre:'bunka',d:'11/21',day:'21',w:'土',time:'14:30',team:'落語研究会',title:'二人会（駿河亭悪團治・宇田川狂鶏）',opp:'学生落語の二人会',venue:'内神田集会室 1F 和室',area:'tokyo',io:'in',seat:'sit',src:'出典：主催の案内チラシ',hl:'学生落語の実力を間近で味わえる二人会。和室の小さな会場で、噺家との距離が近いのも魅力です。落語が初めての方にもおすすめです。',manners:['開演中は静かに鑑賞を','写真撮影・録音は案内に従って','笑うところでは思いきり笑って大丈夫です'],gcal:'20261121T143000/20261121T163000',q:'内神田集会室'},
+{id:3,genre:'sports',d:'11/28',day:'28',w:'土',time:'13:00',team:'サッカー部',title:'全日本大学サッカー選手権大会 予選ラウンド',opp:'対 高松大学',venue:'四国化成MEGLIOスタジアム（香川県）',area:'shikoku',io:'out',seat:'cheer',src:'出典：主催（JUFA）公式日程表',hl:'全国大会（インカレ）出場を決めた明治の初戦は四国での試合です。四国・中国地方にお住まいの方には、近くで応援できる貴重な機会です。',manners:['立見・応援のルールは会場案内に従って','両チームの選手へ拍手を','遠征の際は公共交通機関の利用を'],gcal:'20261128T130000/20261128T150000',q:'四国化成MEGLIOスタジアム'},
+{id:4,genre:'bunka',d:'11/28',day:'28',w:'土',time:'14:00',team:'落語研究会',title:'悪のたまり場 Vol.8',opp:'落語研究会の定期公演',venue:'明治大学 駿河台キャンパス 12号館',area:'tokyo',io:'in',seat:'sit',src:'出典：主催の案内チラシ',hl:'キャンパスで開かれる定期公演。母校のキャンパスを訪ねる楽しみも一緒についてきます。',manners:['開演中は静かに鑑賞を','学内では学生・教職員への配慮を','写真撮影は案内に従って'],gcal:'20261128T140000/20261128T160000',q:'明治大学駿河台キャンパス'},
+{id:5,genre:'bunka',d:'11/28',day:'28',w:'土',time:'17:30',team:'落語研究会',title:'第二回青明寄席',opp:'青山学院大学での合同寄席',venue:'青山学院大学',area:'tokyo',io:'in',seat:'sit',src:'出典：主催の案内チラシ',hl:'他大学との合同寄席。大学落語の交流の場で、他大学の噺も楽しめます。夕方からの公演です。',manners:['開演中は静かに鑑賞を','他大学の出演者にも温かい拍手を','写真撮影は案内に従って'],gcal:'20261128T173000/20261128T193000',q:'青山学院大学'},
+{id:6,genre:'sports',d:'12/2',day:'2',w:'水',time:'14:00',team:'サッカー部',title:'全日本大学サッカー選手権大会 決勝ラウンド Aグループ第1節',opp:'対 国士舘大学（11/28の予選に勝った場合の試合です）',venue:'味の素フィールド西が丘',area:'tokyo',io:'out',seat:'cheer',src:'出典：主催（JUFA）公式日程表',hl:'予選を勝ち上がれば進む決勝ラウンドの初戦。平日午後の試合で、比較的ゆったり観戦できます。',manners:['応援のルールは会場案内に従って','両チームの選手へ拍手を','座席周辺のゴミは持ち帰りを'],gcal:'20261202T140000/20261202T160000',q:'味の素フィールド西が丘'}
+];
+function show(id){
+document.querySelectorAll('.screen').forEach(e=>e.classList.remove('active'));
+document.getElementById('scr-'+id).classList.add('active');
+document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));
+const nb=document.getElementById('nav-'+id); if(nb) nb.classList.add('on');
+document.querySelectorAll('.screen.active')[0].scrollTop=0;
+if(id==='help'&&!quizStarted) startQuiz();
+}
+function cardHTML(e){
+const mon=e.d.split('/')[0]+'月';
+return `<div class="card ${e.genre}">
+<div class="card-top"><div class="date ${e.genre}"><div class="m">${mon}</div><div class="d">${e.day}</div><div class="w">(${e.w})</div></div>
+<div><h3>${e.team}</h3><div class="sub">${e.title}</div></div></div>
+<div class="meta">${e.time} 開始<br>${e.opp}<br>会場：${e.venue}</div>
+<div class="src ${e.genre}">${e.src}</div>
+<div class="btns">
+<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.q)}">地図で見る</a>
+<a class="btn" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(''+e.team+' '+e.title)}&dates=${e.gcal}&location=${encodeURIComponent(e.venue)}">カレンダーへ</a>
+<button class="btn primary" onclick="detail(${e.id})">見どころ</button>
+</div></div>`;
+}
+function renderEv(f){
+document.getElementById('evlist').innerHTML=EV.filter(e=>f==='all'||e.genre===f).map(cardHTML).join('');
+}
+function filterEv(f,el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');renderEv(f);}
+function detail(id){
+const e=EV.find(x=>x.id===id);
+document.getElementById('detail-body').innerHTML=
+`<h3>${e.team} ― ${e.title}</h3>
+<p style="margin-top:8px">${e.d}（${e.w}）${e.time} 開始<br>${e.opp}<br>会場：${e.venue}</p>
+<h4>見どころ</h4><p>${e.hl}</p>
+<h4>応援の作法（品位ある応援）</h4><ul>${e.manners.map(m=>'<li>'+m+'</li>').join('')}</ul>
+<h4>初めての方へ</h4><p>チケットや当日の案内は、主催・大学の公式情報をご確認ください。このデモでは、詳細が未定のものは未定のまま正直に表示しています。</p>
+<div class="btns"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.q)}">地図で見る</a>
+<a class="btn primary" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(''+e.team+' '+e.title)}&dates=${e.gcal}&location=${encodeURIComponent(e.venue)}">カレンダーへ追加</a></div>
+<p class="join-note">${e.src}</p>`;
+show('detail');
+}
+renderEv('all');
+</script>
+<script>
+const QS=[
+{t:'どんな応援・鑑賞がお好みですか？',o:[['スポーツの応援','g','sports'],['文化系の公演・鑑賞','g','bunka'],['どちらでも','g','any']]},
+{t:'行きやすい地域はどちらですか？',o:[['東京近郊','a','tokyo'],['四国・中国地方','a','shikoku'],['どこでもよい','a','any']]},
+{t:'行きやすいのはいつですか？',o:[['土曜日','d','sat'],['平日でもよい','d','weekday'],['いつでもよい','d','any']]},
+{t:'観戦・鑑賞のスタイルは？',o:[['座ってゆっくり観たい','s','sit'],['立って声援を送りたい','s','cheer'],['どちらでも','s','any']]},
+{t:'屋内・屋外のご希望は？',o:[['屋内がよい','io','in'],['屋外がよい','io','out'],['どちらでも','io','any']]}
+];
+let qi=0,ans={},quizStarted=false;
+function startQuiz(){quizStarted=true;qi=0;ans={};drawQ();}
+function drawQ(){
+ const qz=document.getElementById('quiz');
+ if(qi>=QS.length){result();return;}
+ const q=QS[qi];
+ qz.innerHTML=`<div class="prog">質問 ${qi+1} / ${QS.length}（あと${QS.length-qi}問）</div><div class="q"><p class="qtext">${q.t}</p>`+
+ q.o.map(o=>`<button class="opt" onclick="answer('${o[1]}','${o[2]}')">${o[0]}</button>`).join('')+`</div>`+
+ (qi>0?`<button class="back" onclick="qi--;drawQ()">← 前の質問に戻る</button>`:'');
+}
+function answer(k,v){ans[k]=v;qi++;drawQ();}
+function result(){
+ const scored=EV.map(e=>{
+  let sc=0;const rs=[];
+  if(ans.g!=='any'){if(e.genre===ans.g){sc+=3;rs.push(ans.g==='sports'?'スポーツ応援のご希望に合います':'文化系鑑賞のご希望に合います');}else sc-=99;}
+  if(ans.a!=='any'){if(e.area===ans.a){sc+=2;rs.push('行きやすい地域です');}else sc-=2;}
+  if(ans.d!=='any'){const isSat=e.w==='土';if((ans.d==='sat'&&isSat)||(ans.d==='weekday'&&!isSat)){sc+=2;rs.push(ans.d==='sat'?'土曜日の開催です':'平日の開催です');}}
+  if(ans.s!=='any'){if(e.seat===ans.s){sc+=2;rs.push(ans.s==='sit'?'座ってゆっくり観られます':'声援を送って楽しめます');}}
+  if(ans.io!=='any'){if(e.io===ans.io){sc+=1;rs.push(ans.io==='in'?'屋内の会場です':'屋外の会場です');}}
+  return {e,sc,rs};
+ }).filter(x=>x.sc>-50).sort((a,b)=>b.sc-a.sc).slice(0,3);
+ const qz=document.getElementById('quiz');
+ if(!scored.length){
+  qz.innerHTML=`<p style="font-size:16.5px;line-height:1.7">今の条件に合う直近の予定は見つかりませんでした。条件をゆるめて、もう一度お試しください。</p><button class="submit" onclick="startQuiz()">もう一度探す</button>`;
+  return;
+ }
+ qz.innerHTML=`<p style="font-size:17px;font-weight:700;line-height:1.6">あなたにおすすめの応援は、この${scored.length}件です</p>`+
+ scored.map(x=>`<div style="margin-top:12px"><p style="font-size:14.5px;color:#2A1757;font-weight:700">おすすめの理由：${x.rs.join(' ／ ')||'条件に近い予定です'}</p>${cardHTML(x.e)}</div>`).join('')+
+ `<button class="submit" onclick="startQuiz()">条件を変えて、もう一度探す</button>`;
+}
+</script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(e){console.log(e)})}</script>
+</body></html>
