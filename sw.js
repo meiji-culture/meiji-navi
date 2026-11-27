@@ -1,7 +1,7 @@
-// めいじ応援ナビ service worker（試作版）
-// 方針：アプリの外枠だけをキャッシュし、予定データなど変わるものは常にネットワーク優先にする。
-// バージョンを上げると古いキャッシュは破棄される（残留リスクへの対策）。
-const CACHE = 'meiji-navi-v4';
+// めいじ応援ナビ service worker
+// 方針：画面（HTML）はネットワーク優先で常に最新を取りに行き、失敗時のみキャッシュを使う。
+// 画像などの静的ファイルはキャッシュ優先。予定データはアプリ側で都度取得する。
+const CACHE = 'meiji-navi-v6';
 const SHELL = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './banner.png', './logo.png'];
 
 self.addEventListener('install', (e) => {
@@ -19,10 +19,17 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET') return;
-  // 同一オリジンの静的ファイルだけキャッシュ優先。それ以外（地図・カレンダー等）はネットワーク。
-  if (url.origin === location.origin) {
+  if (url.origin !== location.origin) return;
+  const isPage = e.request.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('index.html');
+  if (isPage) {
     e.respondWith(
-      caches.match(e.request).then((hit) => hit || fetch(e.request))
+      fetch(e.request).then((res) => {
+        const copy = res.clone();
+        caches.open(CACHE).then((c) => c.put('./index.html', copy));
+        return res;
+      }).catch(() => caches.match('./index.html'))
     );
+  } else {
+    e.respondWith(caches.match(e.request).then((hit) => hit || fetch(e.request)));
   }
 });

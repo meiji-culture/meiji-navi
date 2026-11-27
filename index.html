@@ -66,11 +66,11 @@ a.ext{color:#2A1757;font-weight:700}
 </style></head>
 <body><div class="wrap" style="max-width:430px;padding:0">
 <div class="phone">
-<div class="demo-bar">試作版（PWA） ― ホーム画面に追加できます</div>
+<div class="demo-bar">ホーム画面に追加すると、アプリのように使えます</div>
 <div class="app-head"><div class="head-row"><img class="head-logo" src="logo.png" alt="明治大学元父母の会ロゴ"><div><div class="org">明治大学元父母の会</div><div class="name">めいじ応援ナビ</div></div><img class="head-banner" src="banner.png" alt="つながる想い、広がる Meiji"></div><div class="tag">明治はひとつ ― 学生の応援・鑑賞は、ここひとつで</div></div>
 
 <section class="screen active" id="scr-home">
-<div class="sec-title">今週の応援 <small>11月21日（土）〜</small></div>
+<div class="sec-title">今週の応援 <small id="ev-range">読み込み中…</small></div>
 <div class="chips">
 <button class="chip on" onclick="filterEv('all',this)">すべて</button>
 <button class="chip" onclick="filterEv('sports',this)">スポーツ</button>
@@ -107,8 +107,6 @@ a.ext{color:#2A1757;font-weight:700}
 <input class="fi" id="rp-name" placeholder="例）紫紺ファン">
 <label class="fl">行ったイベント</label>
 <select class="fi" id="rp-ev">
-<option>11/21 硬式野球部 明治神宮野球大会 初戦</option>
-<option>11/21 落語研究会 二人会</option>
 <option>11/28 サッカー部 インカレ予選（対 高松大学）</option>
 <option>11/28 落語研究会 悪のたまり場 Vol.8</option>
 <option>11/28 落語研究会 第二回青明寄席</option>
@@ -116,10 +114,10 @@ a.ext{color:#2A1757;font-weight:700}
 </select>
 <label class="fl">感想（ひとこと）</label>
 <textarea class="fi" id="rp-text" rows="3" placeholder="会場の様子や、学生への応援メッセージをどうぞ"></textarea>
-<label class="fl">写真を選ぶ（デモでは送信されません）</label>
+<label class="fl">写真を選ぶ（投稿機能は準備中のため、現在は送信できません）</label>
 <input class="fi" type="file" accept="image/*">
-<button class="submit" onclick="document.getElementById('rp-ok').style.display='block'">投稿する（確認画面へ）</button>
-<div class="ok" id="rp-ok">ありがとうございます。これはデモのため、実際には送信されません。<br>本番では「下書き保存 → 運営の確認 → 公開」の順に進みます。</div>
+<button class="submit" onclick="document.getElementById('rp-ok').style.display='block'">内容を確認する</button>
+<div class="ok" id="rp-ok">ありがとうございます。投稿機能は現在準備中のため、この内容は送信されません。<br>リポートは当面、ファンサイトのMファンリポートへお寄せください。公開前に運営が確認します。</div>
 </section>
 
 <section class="screen" id="scr-about">
@@ -142,14 +140,82 @@ a.ext{color:#2A1757;font-weight:700}
 </nav>
 </div></div>
 <script>
-const EV=[
-{id:1,genre:'sports',d:'11/21',day:'21',w:'土',time:'13:30',team:'硬式野球部',title:'明治神宮野球大会 初戦',opp:'対戦相手：筑波大学と中京大学の勝者（11/19決定）',venue:'明治神宮野球場',area:'tokyo',io:'out',seat:'cheer',src:'出典：大会日程（主催者公式ページでの最終確認は公開前に行います）',hl:'秋のリーグ戦で優勝した明治の、全国大会の初戦です。神宮球場の大舞台で、学生の全力プレーを応援しましょう。',manners:['応援歌は周りに合わせて一緒に','相手チームの好プレーにも拍手を','通路に荷物を置かず、周りへの配慮を'],gcal:'20261121T133000/20261121T163000',q:'明治神宮野球場'},
-{id:2,genre:'bunka',d:'11/21',day:'21',w:'土',time:'14:30',team:'落語研究会',title:'二人会（駿河亭悪團治・宇田川狂鶏）',opp:'学生落語の二人会',venue:'内神田集会室 1F 和室',area:'tokyo',io:'in',seat:'sit',src:'出典：主催の案内チラシ',hl:'学生落語の実力を間近で味わえる二人会。和室の小さな会場で、噺家との距離が近いのも魅力です。落語が初めての方にもおすすめです。',manners:['開演中は静かに鑑賞を','写真撮影・録音は案内に従って','笑うところでは思いきり笑って大丈夫です'],gcal:'20261121T143000/20261121T163000',q:'内神田集会室'},
+let EV=[];
+const EV_SAMPLE=[
 {id:3,genre:'sports',d:'11/28',day:'28',w:'土',time:'13:00',team:'サッカー部',title:'全日本大学サッカー選手権大会 予選ラウンド',opp:'対 高松大学',venue:'四国化成MEGLIOスタジアム（香川県）',area:'shikoku',io:'out',seat:'cheer',src:'出典：主催（JUFA）公式日程表',hl:'全国大会（インカレ）出場を決めた明治の初戦は四国での試合です。四国・中国地方にお住まいの方には、近くで応援できる貴重な機会です。',manners:['立見・応援のルールは会場案内に従って','両チームの選手へ拍手を','遠征の際は公共交通機関の利用を'],gcal:'20261128T130000/20261128T150000',q:'四国化成MEGLIOスタジアム'},
 {id:4,genre:'bunka',d:'11/28',day:'28',w:'土',time:'14:00',team:'落語研究会',title:'悪のたまり場 Vol.8',opp:'落語研究会の定期公演',venue:'明治大学 駿河台キャンパス 12号館',area:'tokyo',io:'in',seat:'sit',src:'出典：主催の案内チラシ',hl:'キャンパスで開かれる定期公演。母校のキャンパスを訪ねる楽しみも一緒についてきます。',manners:['開演中は静かに鑑賞を','学内では学生・教職員への配慮を','写真撮影は案内に従って'],gcal:'20261128T140000/20261128T160000',q:'明治大学駿河台キャンパス'},
 {id:5,genre:'bunka',d:'11/28',day:'28',w:'土',time:'17:30',team:'落語研究会',title:'第二回青明寄席',opp:'青山学院大学での合同寄席',venue:'青山学院大学',area:'tokyo',io:'in',seat:'sit',src:'出典：主催の案内チラシ',hl:'他大学との合同寄席。大学落語の交流の場で、他大学の噺も楽しめます。夕方からの公演です。',manners:['開演中は静かに鑑賞を','他大学の出演者にも温かい拍手を','写真撮影は案内に従って'],gcal:'20261128T173000/20261128T193000',q:'青山学院大学'},
 {id:6,genre:'sports',d:'12/2',day:'2',w:'水',time:'14:00',team:'サッカー部',title:'全日本大学サッカー選手権大会 決勝ラウンド Aグループ第1節',opp:'対 国士舘大学（11/28の予選に勝った場合の試合です）',venue:'味の素フィールド西が丘',area:'tokyo',io:'out',seat:'cheer',src:'出典：主催（JUFA）公式日程表',hl:'予選を勝ち上がれば進む決勝ラウンドの初戦。平日午後の試合で、比較的ゆったり観戦できます。',manners:['応援のルールは会場案内に従って','両チームの選手へ拍手を','座席周辺のゴミは持ち帰りを'],gcal:'20261202T140000/20261202T160000',q:'味の素フィールド西が丘'}
 ];
+
+const FEED_URL='https://script.google.com/macros/s/AKfycbzg3rec1Wl70joEKs5RyuRd4TwpT6EuWBS04vEomlmmtbMDTyDcvqAwdoqlYecTY4Pl/exec';
+const WD=['日','月','火','水','木','金','土'];
+function parseExtra(x){
+ const o={url:'',hl:'',note:''};
+ if(!x) return o;
+ const um=x.match(/https?:\/\/[^\s）)]+/); if(um) o.url=um[0];
+ const hm=x.match(/（見どころ）([\s\S]*?)(（注意点）|（大会要項|$)/); if(hm) o.hl=hm[1].trim();
+ const nm=x.match(/（注意点）([\s\S]*?)(（大会要項|$)/); if(nm) o.note=nm[1].trim();
+ return o;
+}
+function mapFeed(r,i){
+ const [y,m,d]=r.startDate.split('-').map(Number);
+ const dt=new Date(y,m-1,d);
+ const w=WD[dt.getDay()];
+ const genre=(r.team.indexOf('体育会')===0)?'sports':'bunka';
+ let area='other'; const ad=(r.address||'')+(r.venue||'');
+ if(/東京/.test(ad)) area='tokyo'; else if(/香川|徳島|高知|愛媛|広島|岡山|山口|鳥取|島根/.test(ad)) area='shikoku';
+ const ex=parseExtra(r.extra);
+ let gcal='';
+ if(r.startTime){
+   const st=r.startTime.replace(':','')+'00';
+   const endD=new Date(dt.getTime()+2*3600*1000);
+   const ed=r.endDate? new Date(...r.endDate.split('-').map(Number)) : dt;
+   const endBase=(r.endDate&&r.endDate!==r.startDate)? ed : dt;
+   const ehm=new Date(endBase.getTime()+ (parseInt(r.startTime.slice(0,2))+2)*3600*1000 + parseInt(r.startTime.slice(3,5))*60000);
+   const f=n=>String(n).padStart(2,'0');
+   const df=(dd)=>`${dd.getFullYear()}${f(dd.getMonth()+1)}${f(dd.getDate())}`;
+   gcal=`${r.startDate.replace(/-/g,'')}T${st}/${df(ehm)}T${f(ehm.getHours())}${f(ehm.getMinutes())}00`;
+ } else {
+   const nd=new Date(dt.getTime()+86400000);
+   const f=n=>String(n).padStart(2,'0');
+   gcal=`${r.startDate.replace(/-/g,'')}/${nd.getFullYear()}${f(nd.getMonth()+1)}${f(nd.getDate())}`;
+ }
+ return {id:1000+i,genre:genre,d:`${m}/${d}`,day:String(d),w:w,time:r.startTime||'時刻未定',
+  team:r.team,title:r.title,opp:(r.endDate&&r.endDate!==r.startDate)?`〜${r.endDate.slice(5).replace('-','/')} まで`:'',
+  venue:r.venue||'会場未定',area:area,io:'',seat:'',
+  src:ex.url?'出典：主催の公式情報（見どころ画面にリンクがあります）':'出典：応援カレンダー（明治大学元父母の会）',
+  url:ex.url,hl:ex.hl||'見どころは、主催の公式情報をご確認ください。',
+  manners:ex.note?[ex.note]:['相手チームの好プレーにも拍手を','会場の案内とルールに従って','周りの方への配慮を忘れずに'],
+  gcal:gcal,q:(r.venue||'')+' '+(r.address||'')};
+}
+async function loadFeed(){
+ try{
+  const res=await fetch(FEED_URL,{cache:'no-store'});
+  const data=await res.json();
+  const today=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
+  const f=n=>String(n).padStart(2,'0');
+  const tstr=`${today.getFullYear()}-${f(today.getMonth()+1)}${''}-${f(today.getDate())}`.replace('-','-');
+  const seen=new Set(); const list=[];
+  (data.events||[]).forEach(r=>{
+   if(!r.startDate||r.startDate<tstr) return;
+   const k=[r.startDate,r.startTime,r.team,r.title,r.venue].join('|');
+   if(seen.has(k)) return; seen.add(k); list.push(r);
+  });
+  if(list.length){
+   EV=list.map(mapFeed);
+   const last=EV[EV.length-1];
+   document.getElementById('ev-range').textContent=`${EV[0].d}（${EV[0].w}）〜${last.d}（${last.w}）・${EV.length}件`;
+   const sel=document.getElementById('rp-ev');
+   sel.innerHTML=EV.slice(0,12).map(e=>`<option>${e.d} ${e.team} ${e.title}</option>`).join('');
+   renderEv('all');
+   return;
+  }
+ }catch(e){ console.log('feed error',e); }
+ EV=EV_SAMPLE;
+ document.getElementById('ev-range').textContent='見本データを表示中（最新情報を取得できませんでした）';
+ renderEv('all');
+}
 function show(id){
 document.querySelectorAll('.screen').forEach(e=>e.classList.remove('active'));
 document.getElementById('scr-'+id).classList.add('active');
@@ -182,13 +248,15 @@ document.getElementById('detail-body').innerHTML=
 <p style="margin-top:8px">${e.d}（${e.w}）${e.time} 開始<br>${e.opp}<br>会場：${e.venue}</p>
 <h4>見どころ</h4><p>${e.hl}</p>
 <h4>応援の作法（品位ある応援）</h4><ul>${e.manners.map(m=>'<li>'+m+'</li>').join('')}</ul>
-<h4>初めての方へ</h4><p>チケットや当日の案内は、主催・大学の公式情報をご確認ください。このデモでは、詳細が未定のものは未定のまま正直に表示しています。</p>
+<h4>初めての方へ</h4><p>チケットや当日の案内は、主催・大学の公式情報をご確認ください。詳細が未定のものは、未定のまま表示しています。</p>
 <div class="btns"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.q)}">地図で見る</a>
 <a class="btn primary" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(''+e.team+' '+e.title)}&dates=${e.gcal}&location=${encodeURIComponent(e.venue)}">カレンダーへ追加</a></div>
-<p class="join-note">${e.src}</p>`;
+<p class="join-note">${e.src}</p>${e.url?`<p style="margin-top:6px"><a class="ext" href="${e.url}" target="_blank" rel="noopener">主催の公式情報を見る</a></p>`:``}`;
 show('detail');
 }
+EV=EV_SAMPLE;
 renderEv('all');
+loadFeed();
 </script>
 <script>
 const QS=[
