@@ -1,7 +1,7 @@
 // めいじ応援ナビ service worker
 // 方針：画面（HTML）はネットワーク優先で常に最新を取りに行き、失敗時のみキャッシュを使う。
 // 画像などの静的ファイルはキャッシュ優先。予定データはアプリ側で都度取得する。
-const CACHE = 'meiji-navi-v6';
+const CACHE = 'meiji-navi-v8';
 const SHELL = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './banner.png', './logo.png'];
 
 self.addEventListener('install', (e) => {
