@@ -1,7 +1,7 @@
 // めいじ応援ナビ service worker（試作版）
 // 方針：アプリの外枠だけをキャッシュし、予定データなど変わるものは常にネットワーク優先にする。
 // バージョンを上げると古いキャッシュは破棄される（残留リスクへの対策）。
-const CACHE = 'meiji-navi-v3';
+const CACHE = 'meiji-navi-v4';
 const SHELL = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './banner.png', './logo.png'];
 
 self.addEventListener('install', (e) => {
