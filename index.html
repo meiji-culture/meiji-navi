@@ -69,11 +69,12 @@ a.ext{color:#2A1757;font-weight:700}
 </style></head>
 <body><div class="wrap" style="max-width:430px;padding:0">
 <div class="phone">
-<div class="demo-bar">ホーム画面に追加すると、アプリのように使えます</div>
+<a class="demo-bar" href="install.html" style="display:block;text-decoration:none;color:inherit">ホーム画面に追加すると、アプリのように使えます（追加方法はこちら ›）</a>
 <div class="app-head"><div class="head-row"><img class="head-logo" src="logo.png" alt="明治大学元父母の会ロゴ"><div><div class="org">明治大学元父母の会</div><div class="name">めいじ応援ナビ</div></div><img class="head-banner" src="banner.png" alt="つながる想い、広がる Meiji"></div><div class="tag">明治はひとつ ― 学生の応援・鑑賞は、ここひとつで</div></div>
 
 <section class="screen active" id="scr-home">
 <div class="sec-title">Mファンの入口 <small>リンク集</small></div>
+<a class="linkcard" href="install.html"><span class="ic">📱</span><span><span class="t">ホーム画面に追加する方法</span><br><span class="d">アイコンからすぐ開けて便利です</span></span><span class="arr">›</span></a>
 <a class="linkcard" href="https://sites.google.com/view/motofubonokai" target="_blank" rel="noopener"><span class="ic">🏠</span><span><span class="t">ファンサイト（ホームページ）</span><br><span class="d">元父母の会 応援お役立ちファンサイト</span></span><span class="arr">›</span></a>
 <a class="linkcard" href="https://www.instagram.com/meiji_motofubo/" target="_blank" rel="noopener"><span class="ic">📖</span><span><span class="t">紫紺の言の葉</span><br><span class="d">毎日の言葉を公式Instagramで配信中</span></span><span class="arr">›</span></a>
 <a class="linkcard" href="https://sites.google.com/view/motofubonokai/2-2" target="_blank" rel="noopener"><span class="ic">💬</span><span><span class="t">AIコンシェルジュ「文化の潮3.0」</span><br><span class="d">AI相談室と今後の予定はこちら</span></span><span class="arr">›</span></a>
@@ -146,10 +147,10 @@ a.ext{color:#2A1757;font-weight:700}
 <script>
 let EV=[];
 const EV_SAMPLE=[
-{id:3,genre:'sports',d:'11/28',day:'28',w:'土',time:'13:00',team:'サッカー部',title:'全日本大学サッカー選手権大会 予選ラウンド',opp:'対 高松大学',venue:'四国化成MEGLIOスタジアム（香川県）',area:'shikoku',io:'out',seat:'cheer',src:'出典：主催（JUFA）公式日程表',hl:'全国大会（インカレ）出場を決めた明治の初戦は四国での試合です。四国・中国地方にお住まいの方には、近くで応援できる貴重な機会です。',manners:['立見・応援のルールは会場案内に従って','両チームの選手へ拍手を','遠征の際は公共交通機関の利用を'],gcal:'20261128T130000/20261128T150000',q:'四国化成MEGLIOスタジアム'},
-{id:4,genre:'bunka',d:'11/28',day:'28',w:'土',time:'14:00',team:'落語研究会',title:'悪のたまり場 Vol.8',opp:'落語研究会の定期公演',venue:'明治大学 駿河台キャンパス 12号館',area:'tokyo',io:'in',seat:'sit',src:'出典：主催の案内チラシ',hl:'キャンパスで開かれる定期公演。母校のキャンパスを訪ねる楽しみも一緒についてきます。',manners:['開演中は静かに鑑賞を','学内では学生・教職員への配慮を','写真撮影は案内に従って'],gcal:'20261128T140000/20261128T160000',q:'明治大学駿河台キャンパス'},
-{id:5,genre:'bunka',d:'11/28',day:'28',w:'土',time:'17:30',team:'落語研究会',title:'第二回青明寄席',opp:'青山学院大学での合同寄席',venue:'青山学院大学',area:'tokyo',io:'in',seat:'sit',src:'出典：主催の案内チラシ',hl:'他大学との合同寄席。大学落語の交流の場で、他大学の噺も楽しめます。夕方からの公演です。',manners:['開演中は静かに鑑賞を','他大学の出演者にも温かい拍手を','写真撮影は案内に従って'],gcal:'20261128T173000/20261128T193000',q:'青山学院大学'},
-{id:6,genre:'sports',d:'12/2',day:'2',w:'水',time:'14:00',team:'サッカー部',title:'全日本大学サッカー選手権大会 決勝ラウンド Aグループ第1節',opp:'対 国士舘大学（11/28の予選に勝った場合の試合です）',venue:'味の素フィールド西が丘',area:'tokyo',io:'out',seat:'cheer',src:'出典：主催（JUFA）公式日程表',hl:'予選を勝ち上がれば進む決勝ラウンドの初戦。平日午後の試合で、比較的ゆったり観戦できます。',manners:['応援のルールは会場案内に従って','両チームの選手へ拍手を','座席周辺のゴミは持ち帰りを'],gcal:'20261202T140000/20261202T160000',q:'味の素フィールド西が丘'}
+{id:3,genre:'sports',d:'11/28',day:'28',w:'土',time:'13:00',team:'サッカー部',title:'全日本大学サッカー選手権大会 予選ラウンド',opp:'対 高松大学',venue:'四国化成MEGLIOスタジアム（香川県）',area:'chushikoku',io:'out',seat:'cheer',src:'出典：主催（JUFA）公式日程表',hl:'全国大会（インカレ）出場を決めた明治の初戦は四国での試合です。四国・中国地方にお住まいの方には、近くで応援できる貴重な機会です。',manners:['立見・応援のルールは会場案内に従って','両チームの選手へ拍手を','遠征の際は公共交通機関の利用を'],gcal:'20261128T130000/20261128T150000',q:'四国化成MEGLIOスタジアム'},
+{id:4,genre:'bunka',d:'11/28',day:'28',w:'土',time:'14:00',team:'落語研究会',title:'悪のたまり場 Vol.8',opp:'落語研究会の定期公演',venue:'明治大学 駿河台キャンパス 12号館',area:'kanto',io:'in',seat:'sit',src:'出典：主催の案内チラシ',hl:'キャンパスで開かれる定期公演。母校のキャンパスを訪ねる楽しみも一緒についてきます。',manners:['開演中は静かに鑑賞を','学内では学生・教職員への配慮を','写真撮影は案内に従って'],gcal:'20261128T140000/20261128T160000',q:'明治大学駿河台キャンパス'},
+{id:5,genre:'bunka',d:'11/28',day:'28',w:'土',time:'17:30',team:'落語研究会',title:'第二回青明寄席',opp:'青山学院大学での合同寄席',venue:'青山学院大学',area:'kanto',io:'in',seat:'sit',src:'出典：主催の案内チラシ',hl:'他大学との合同寄席。大学落語の交流の場で、他大学の噺も楽しめます。夕方からの公演です。',manners:['開演中は静かに鑑賞を','他大学の出演者にも温かい拍手を','写真撮影は案内に従って'],gcal:'20261128T173000/20261128T193000',q:'青山学院大学'},
+{id:6,genre:'sports',d:'12/2',day:'2',w:'水',time:'14:00',team:'サッカー部',title:'全日本大学サッカー選手権大会 決勝ラウンド Aグループ第1節',opp:'対 国士舘大学（11/28の予選に勝った場合の試合です）',venue:'味の素フィールド西が丘',area:'kanto',io:'out',seat:'cheer',src:'出典：主催（JUFA）公式日程表',hl:'予選を勝ち上がれば進む決勝ラウンドの初戦。平日午後の試合で、比較的ゆったり観戦できます。',manners:['応援のルールは会場案内に従って','両チームの選手へ拍手を','座席周辺のゴミは持ち帰りを'],gcal:'20261202T140000/20261202T160000',q:'味の素フィールド西が丘'}
 ];
 
 const FEED_URL='https://script.google.com/macros/s/AKfycbzg3rec1Wl70joEKs5RyuRd4TwpT6EuWBS04vEomlmmtbMDTyDcvqAwdoqlYecTY4Pl/exec';
@@ -168,7 +169,17 @@ function mapFeed(r,i){
  const w=WD[dt.getDay()];
  const genre=(r.team.indexOf('体育会')===0)?'sports':'bunka';
  let area='other'; const ad=(r.address||'')+(r.venue||'');
- if(/東京/.test(ad)) area='tokyo'; else if(/香川|徳島|高知|愛媛|広島|岡山|山口|鳥取|島根/.test(ad)) area='shikoku';
+ const PREF={'北海道':'tohoku','青森県':'tohoku','岩手県':'tohoku','宮城県':'tohoku','秋田県':'tohoku','山形県':'tohoku','福島県':'tohoku','東京都':'kanto','神奈川県':'kanto','千葉県':'kanto','埼玉県':'kanto','茨城県':'kanto','栃木県':'kanto','群馬県':'kanto','新潟県':'chubu','富山県':'chubu','石川県':'chubu','福井県':'chubu','山梨県':'chubu','長野県':'chubu','岐阜県':'chubu','静岡県':'chubu','愛知県':'chubu','三重県':'chubu','大阪府':'kansai','京都府':'kansai','兵庫県':'kansai','奈良県':'kansai','和歌山県':'kansai','滋賀県':'kansai','広島県':'chushikoku','岡山県':'chushikoku','山口県':'chushikoku','鳥取県':'chushikoku','島根県':'chushikoku','香川県':'chushikoku','徳島県':'chushikoku','高知県':'chushikoku','愛媛県':'chushikoku','福岡県':'kyushu','佐賀県':'kyushu','長崎県':'kyushu','熊本県':'kyushu','大分県':'kyushu','宮崎県':'kyushu','鹿児島県':'kyushu','沖縄県':'kyushu'};
+ for(const p in PREF){ if(ad.indexOf(p)>=0){ area=PREF[p]; break; } }
+ if(area==='other'){
+  if(/河内長野/.test(ad)) area='kansai';
+  else if(/北海道|青森|岩手|宮城|秋田|山形|福島/.test(ad)) area='tohoku';
+  else if(/東京|神奈川|千葉|埼玉|茨城|栃木|群馬/.test(ad)) area='kanto';
+  else if(/大阪|京都|兵庫|奈良|和歌山|滋賀/.test(ad)) area='kansai';
+  else if(/新潟|富山|石川|福井|山梨|長野|岐阜|静岡|愛知|三重/.test(ad)) area='chubu';
+  else if(/広島|岡山|山口|鳥取|島根|香川|徳島|高知|愛媛/.test(ad)) area='chushikoku';
+  else if(/福岡|佐賀|長崎|熊本|大分|宮崎|鹿児島|沖縄/.test(ad)) area='kyushu';
+ }
  const ex=parseExtra(r.extra);
  let gcal='';
  if(r.startTime){
@@ -265,7 +276,7 @@ loadFeed();
 <script>
 const QS=[
 {t:'どんな応援・鑑賞がお好みですか？',o:[['スポーツの応援','g','sports'],['文化系の公演・鑑賞','g','bunka'],['どちらでも','g','any']]},
-{t:'行きやすい地域はどちらですか？',o:[['東京近郊','a','tokyo'],['四国・中国地方','a','shikoku'],['どこでもよい','a','any']]},
+{t:'行きやすい地域はどちらですか？',o:[['北海道・東北','a','tohoku'],['関東（東京近郊）','a','kanto'],['中部・北陸','a','chubu'],['関西','a','kansai'],['中国・四国','a','chushikoku'],['九州・沖縄','a','kyushu'],['どこでもよい','a','any']]},
 {t:'行きやすいのはいつですか？',o:[['土曜日','d','sat'],['平日でもよい','d','weekday'],['いつでもよい','d','any']]},
 {t:'観戦・鑑賞のスタイルは？',o:[['座ってゆっくり観たい','s','sit'],['立って声援を送りたい','s','cheer'],['どちらでも','s','any']]},
 {t:'屋内・屋外のご希望は？',o:[['屋内がよい','io','in'],['屋外がよい','io','out'],['どちらでも','io','any']]}
@@ -285,7 +296,7 @@ function result(){
  const scored=EV.map(e=>{
   let sc=0;const rs=[];
   if(ans.g!=='any'){if(e.genre===ans.g){sc+=3;rs.push(ans.g==='sports'?'スポーツ応援のご希望に合います':'文化系鑑賞のご希望に合います');}else sc-=99;}
-  if(ans.a!=='any'){if(e.area===ans.a){sc+=2;rs.push('行きやすい地域です');}else sc-=2;}
+  if(ans.a!=='any'){if(e.area===ans.a){sc+=2;rs.push('行きやすい地域です');}else if(e.area!=='other') sc-=2;}
   if(ans.d!=='any'){const isSat=e.w==='土';if((ans.d==='sat'&&isSat)||(ans.d==='weekday'&&!isSat)){sc+=2;rs.push(ans.d==='sat'?'土曜日の開催です':'平日の開催です');}}
   if(ans.s!=='any'){if(e.seat===ans.s){sc+=2;rs.push(ans.s==='sit'?'座ってゆっくり観られます':'声援を送って楽しめます');}}
   if(ans.io!=='any'){if(e.io===ans.io){sc+=1;rs.push(ans.io==='in'?'屋内の会場です':'屋外の会場です');}}

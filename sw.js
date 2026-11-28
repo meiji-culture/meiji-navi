@@ -1,8 +1,8 @@
 // めいじ応援ナビ service worker
 // 方針：画面（HTML）はネットワーク優先で常に最新を取りに行き、失敗時のみキャッシュを使う。
 // 画像などの静的ファイルはキャッシュ優先。予定データはアプリ側で都度取得する。
-const CACHE = 'meiji-navi-v8';
-const SHELL = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './banner.png', './logo.png'];
+const CACHE = 'meiji-navi-v10';
+const SHELL = ['./', './index.html', './install.html', './manifest.json', './icon-192.png', './icon-512.png', './banner.png', './logo.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -25,9 +25,9 @@ self.addEventListener('fetch', (e) => {
     e.respondWith(
       fetch(e.request).then((res) => {
         const copy = res.clone();
-        caches.open(CACHE).then((c) => c.put('./index.html', copy));
+        caches.open(CACHE).then((c) => c.put(e.request, copy));
         return res;
-      }).catch(() => caches.match('./index.html'))
+      }).catch(() => caches.match(e.request).then((hit) => hit || caches.match('./index.html')))
     );
   } else {
     e.respondWith(caches.match(e.request).then((hit) => hit || fetch(e.request)));
